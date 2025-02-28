@@ -12,6 +12,9 @@ class NetworkLayer(OSILayer):
         self.destination_ip = socket.inet_aton(destination_ip)
         self.layer_name = "Network"
         self.packet_id = 0
+        
+        # Register with data link layer
+        self.data_link_layer.register_network_layer(self)
 
     def send(self, data: bytes) -> bytes:
         # Create IPv4 header

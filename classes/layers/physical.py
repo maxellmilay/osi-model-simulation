@@ -20,19 +20,14 @@ class PhysicalLayer(OSILayer):
         return data
 
     def send(self, data: bytes) -> bytes:
-        # Convert to Manchester encoding (simulated)
         self._log_operation("SEND", "Raw data", 0, input_bytes=data)
-        encoded = b''.join(bytes([b, ~b & 0xFF]) for b in data)
-        self._log_operation("SEND", "Manchester encoded", 1, encoded_bytes=encoded)
         
-        result = self._simulate_noise(encoded)
-        if result != encoded:
-            self._log_operation("SEND", "Noise applied", 1, corrupted_bytes=result)
-        return result
+        # Simulate noise/interference
+        data = self._simulate_noise(data)
+        
+        self._log_operation("SEND", "Processed data", 1, processed_bytes=data)
+        return data
 
     def receive(self, data: bytes) -> bytes:
-        # Decode Manchester encoding (simulated)
-        self._log_operation("RECEIVE", "Raw signal", 0, signal=data)
-        decoded = bytes(data[i] for i in range(0, len(data), 2))
-        self._log_operation("RECEIVE", "Manchester decoded", 1, decoded_bytes=decoded)
-        return decoded
+        self._log_operation("RECEIVE", "Raw data", 0, input_bytes=data)
+        return data

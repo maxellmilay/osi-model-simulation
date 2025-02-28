@@ -1,4 +1,3 @@
-
 from classes.layers.physical import PhysicalLayer
 from classes.layers.datalink import DataLinkLayer
 from classes.layers.network import NetworkLayer
@@ -6,6 +5,7 @@ from classes.layers.transport import TransportLayer
 from classes.layers.session import SessionLayer
 from classes.layers.presentation import PresentationLayer
 from classes.layers.application import ApplicationLayer
+
 class Device:
     def __init__(self, name, config):
         self.name = name
@@ -31,6 +31,12 @@ class Device:
             encryption_key=config['encryption_key']
         )
         self.application_layer = ApplicationLayer(self.presentation_layer)
+
+        # Register MAC-IP pair in ARP table
+        DataLinkLayer.register_mac_ip_pair(
+            config['mac_address'],
+            config['source_ip']
+        )
 
     def send_message(self, message):
         print(f"\n[{self.name}] Initiating message transmission")
