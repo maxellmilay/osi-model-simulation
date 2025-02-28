@@ -1,5 +1,11 @@
-from classes.layers import PhysicalLayer, DataLinkLayer, NetworkLayer, TransportLayer, SessionLayer, PresentationLayer, ApplicationLayer
 
+from classes.layers.physical import PhysicalLayer
+from classes.layers.datalink import DataLinkLayer
+from classes.layers.network import NetworkLayer
+from classes.layers.transport import TransportLayer
+from classes.layers.session import SessionLayer
+from classes.layers.presentation import PresentationLayer
+from classes.layers.application import ApplicationLayer
 class Device:
     def __init__(self, name, config):
         self.name = name
