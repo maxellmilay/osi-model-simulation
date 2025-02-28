@@ -25,6 +25,9 @@ Original Message: Hello, World!
 Final Received Message: Hello, World!
 ```
 
+## Note
+- You can play around the device configurations in the main file and test out multiple devices communicating with each other
+
 ## Project Overview
 
 This project implements a detailed simulation of the OSI (Open Systems Interconnection) model, demonstrating how data travels through the seven layers of network communication. The simulation creates two virtual devices that can exchange messages while showing the exact processing that occurs at each layer.
